@@ -11,10 +11,6 @@ class Dinheiro
   def == outroDinheiro
     @valor == outroDinheiro.valor
   end
-  
-  def * numero
-    Dinheiro.new @valor * numero
-  end
    
   def + outroDinheiro
     ret = @valor + outroDinheiro.valor
@@ -28,7 +24,7 @@ class Dinheiro
   
   def to_s
     ret = @valor / 100.to_f
-    ret.to_s
+    "R$ " + ret.to_s
   end
   
 end

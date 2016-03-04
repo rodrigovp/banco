@@ -17,7 +17,7 @@ class DinheiroTest < Test::Unit::TestCase
     umValor = Dinheiro.new 10
     parcela = Dinheiro.new 1
     
-    valorEsperado = Dinheiro.new 11.0
+    valorEsperado = Dinheiro.new 11
     valorObtido = umValor + parcela
     
     assert_equal valorEsperado, valorObtido
@@ -35,6 +35,6 @@ class DinheiroTest < Test::Unit::TestCase
     
   def test_to_s
     valor = Dinheiro.new 1034
-    assert_equal "10.34", valor.to_s
+    assert_equal "R$ 10.34", valor.to_s
   end
 end
