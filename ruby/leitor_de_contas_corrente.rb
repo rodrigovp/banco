@@ -1,25 +1,24 @@
 # -*- encoding : utf-8 -*-
-require 'csv'
 
-class Leitor_de_contas_corrente
+require File.expand_path(File.dirname(__FILE__)) + '/leitor_de_arquivos_csv_do_banco.rb'
+require File.expand_path(File.dirname(__FILE__)) + '/dinheiro.rb'
+require File.expand_path(File.dirname(__FILE__)) + '/conta_corrente.rb'
+
+class Leitor_de_contas_corrente < Leitor_de_arquivos_csv_do_banco
   
-  def ler_contas_do arquivo 
+  def ler_contas_do arquivo
     contas = []
-    array_contas = CSV.read(arquivo)
-    array_contas.each { |linha_do_arquivo| adicionar_conta(linha_do_arquivo, contas) }
+    registros_arquivo = CSV.read(arquivo)
+    registros_arquivo.each { |linha_do_arquivo| adicionar_registro(linha_do_arquivo, contas) }
     contas
   end
-  
-  private
-  def adicionar_conta linha_do_arquivo, contas
-    contas << ContaCorrente.new(linha_do_arquivo[0].to_i, linha_do_arquivo[1].to_i) if eh_valida(linha_do_arquivo)
+
+  def adicionar_registro linha_do_arquivo, contas
+    contas << ler_registro(linha_do_arquivo) if eh_valida linha_do_arquivo
   end
-  
-  def eh_valida linha_do_arquivo 
-    linha_do_arquivo.size == 2 && !linha_do_arquivo[0].nil? && !linha_do_arquivo[1].nil? && eh_inteiro?(linha_do_arquivo[0]) && eh_inteiro?(linha_do_arquivo[1])
+
+  def ler_registro linha_do_arquivo
+    ContaCorrente.new(linha_do_arquivo[0].to_i, Dinheiro.new(linha_do_arquivo[1].to_i))
   end
-  
-  def eh_inteiro? string   
-     Integer(string) != nil rescue false
-  end
+
 end
