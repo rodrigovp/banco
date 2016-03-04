@@ -16,7 +16,6 @@ class Conta_corrente_test < Test::Unit::TestCase
     conta_corrente.realizar um_credito_de_tres_reais
     
     assert_equal Dinheiro.new(11300), conta_corrente.saldo
-    
   end
   
   def test_movimentar_conta_com_somente_debitos
@@ -28,4 +27,12 @@ class Conta_corrente_test < Test::Unit::TestCase
     
     assert_equal Dinheiro.new(10000), conta_corrente.saldo
   end
+  
+  def test_igualdade_de_contas
+    conta_corrente = ContaCorrente.new 100, Dinheiro.new(11300)
+    outra_conta_corrente = ContaCorrente.new 100, Dinheiro.new(100)
+    
+    assert_equal conta_corrente, outra_conta_corrente
+  end
+  
 end
