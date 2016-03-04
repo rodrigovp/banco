@@ -8,23 +8,26 @@ class Dinheiro
     @valor =  valor
   end
   
-  def == outroDinheiro
-    @valor == outroDinheiro.valor
+  def == outro_dinheiro
+    @valor == outro_dinheiro.valor
   end
    
-  def + outroDinheiro
-    ret = @valor + outroDinheiro.valor
+  def + outro_dinheiro
+    ret = @valor + outro_dinheiro.valor
     Dinheiro.new ret
   end
   
-  def - outroDinheiro
-    ret = @valor - outroDinheiro.valor
+  def - outro_dinheiro
+    ret = @valor - outro_dinheiro.valor
     Dinheiro.new ret
+  end
+  
+  def eh_negativo
+    @valor < 0
   end
   
   def to_s
-    ret = @valor / 100.to_f
-    "R$ " + ret.to_s
+    @valor.to_s
   end
   
 end
