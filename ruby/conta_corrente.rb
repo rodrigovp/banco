@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ContaCorrente
   
-  attr_reader :numero
+  attr_reader :saldo
   
   def initialize numero, saldo
     @numero = numero
@@ -9,6 +9,6 @@ class ContaCorrente
   end
   
   def realizar umaTransacao
-    
+    @saldo = umaTransacao.movimentar @saldo
   end
 end
